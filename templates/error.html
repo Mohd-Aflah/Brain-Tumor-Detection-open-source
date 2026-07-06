@@ -4,24 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error - Brain Tumor Analysis v1.0</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        .error-page {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .error-container {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        .error-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+        .error-title {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        .error-description {
+            color: #4b5563;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <span class="brain-icon">🧠</span>
-                <h1>Brain Tumor Analysis</h1>
-                <span class="version">v1.0</span>
+    <!-- Header / Nav -->
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-icon">🧠</span>
+                <span class="logo-text">NeuroAI Vision</span>
             </div>
-            <div class="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/analyze" class="nav-link">Analyze Scan</a>
-            </div>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Error Content -->
     <main class="main-content">
@@ -58,15 +88,26 @@
                 </p>
                 
                 <div class="error-actions">
-                    <a href="/" class="btn-primary">
+                    <a href="/" class="btn btn-primary">
                         <span>← Go Home</span>
-                    </a>
-                    <a href="/analyze" class="btn-secondary">
-                        <span>Try Analysis</span>
                     </a>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-info">
+                <span class="logo-text">NeuroAI Vision</span>
+                <p>Open Source Brain Tumor Detection System</p>
+            </div>
+            <div class="footer-legal">
+                <p>&copy; 2025 mohd-aflah(github). All rights reserved.</p>
+                <p class="small-text">Not a certified medical device. For educational use only.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -153,8 +153,9 @@ def home():
 
 @app.route('/analyze')
 def analyze():
-    """Analysis page"""
-    return render_template('analyze.html')
+    """Analysis page redirect"""
+    from flask import redirect
+    return redirect(url_for('home'))
 
 @app.route('/api/upload', methods=['POST'])
 def upload_and_analyze():

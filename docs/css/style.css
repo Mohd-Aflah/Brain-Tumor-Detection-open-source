@@ -211,7 +211,7 @@ p { margin-bottom: 1rem; }
 .mock-image {
     width: 100%;
     height: 250px;
-    background: #1a1a1a;
+    background: url('../images/mri-scan.jpg') center/cover no-repeat;
     border-radius: 8px;
     margin-bottom: 1.5rem;
     position: relative;
@@ -222,9 +222,7 @@ p { margin-bottom: 1rem; }
 }
 
 .mock-image::before {
-    content: "🧠 MRI Scan Preview";
-    color: #444;
-    font-weight: 600;
+    display: none;
 }
 
 .scan-line {
