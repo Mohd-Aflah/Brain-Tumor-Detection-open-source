@@ -1,8 +1,8 @@
 # 🧠 Brain Tumor Detection System
 
-A comprehensive, educational web application designed for detecting and segmenting brain tumor regions from MRI images. Built using Ultralytics YOLO and a Flask backend, this system is perfect for college projects, research, and learning about AI in healthcare. 
+A comprehensive, educational, and fast open-source web application designed for detecting and segmenting brain tumor regions from MRI images. Built using Ultralytics YOLO and a Flask backend, this system is perfect for college projects, research, and learning about AI in healthcare. 
 
-Anyone can download, run, and use this project locally. It features a modern browser UI for easy interaction.
+Anyone can access, download, run, and use this project freely as a college project or for other non-commercial uses. It features a modern browser UI for easy interaction.
 
 ## 🌟 Key Features
 
@@ -74,8 +74,8 @@ Training/              # Contains the Jupyter Notebook for training the AI model
 
 ## ⚠️ Disclaimer
 
-This project is built for **educational and research purposes only**, making it an ideal reference for college projects and medical AI enthusiasts. It is **not** a certified medical device and must not be used for actual clinical diagnosis, medical advice, or treatment decisions.
+**NOT FOR MEDICAL USE.** This project is built for **educational, open-source, and research purposes only**, making it an ideal reference for college projects and medical AI enthusiasts. It is **not** a certified medical device and must not be used for actual clinical diagnosis, medical advice, or treatment decisions.
 
 ---
 
-**Created by mohd-aflah**
+**Author: mohd-aflah(github)**

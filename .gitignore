@@ -54,6 +54,11 @@ profile_default/
 ipython_config.py
 
 # =========================
+# Datasets / Large folders
+# =========================
+Training/BRAIN-TUMOR-1/
+
+# =========================
 # YOLO / Deep Learning
 # =========================
 # Ignore YOLO training logs/runs

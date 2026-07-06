@@ -12,7 +12,9 @@ Features:
 - Criticality assessment
 - Confidence scoring
 
-Author: Medical AI Team
+Disclaimer: NOT FOR MEDICAL USE. This is an open-source project intended for college projects, research, and learning purposes. Anyone can access, download, and use it.
+
+Author: mohd-aflah(github)
 Version: 1.0
 """
 
@@ -195,8 +197,8 @@ def upload_and_analyze():
         # Load image
         image = cv2.imread(str(file_path))
         
-        # Limit resolution to prevent OOM errors (Max 1920x1080 bounding box)
-        max_dim = 1920
+        # Limit resolution to prevent OOM errors and speed up inference (Max 1024x1024)
+        max_dim = 1024
         h, w = image.shape[:2]
         if max(h, w) > max_dim:
             scale = max_dim / max(h, w)
