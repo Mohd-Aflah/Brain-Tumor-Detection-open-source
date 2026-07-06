@@ -18,6 +18,7 @@ Version: 1.0
 
 import os
 import time
+import uuid
 import logging
 from pathlib import Path
 from datetime import datetime
@@ -117,7 +118,10 @@ class TumorAnalyzer:
             return {}
         
         total_pixels = image_shape[0] * image_shape[1]
-        tumor_pixels = sum(np.sum(mask > 0.5) for mask in masks)
+        
+        # Create a single combined boolean mask to avoid double-counting overlapping regions
+        combined_mask = np.any(np.array(masks) > 0.5, axis=0)
+        tumor_pixels = np.sum(combined_mask)
         
         # Calculate percentage
         percentage = (tumor_pixels / total_pixels) * 100
@@ -125,7 +129,7 @@ class TumorAnalyzer:
         # Calculate volume estimation (simplified)
         volume_mm3 = tumor_pixels * 0.5  # Approximate voxel size
         
-        # Find largest tumor
+        # Find largest individual tumor size for metrics
         largest_tumor = max(np.sum(mask > 0.5) for mask in masks)
         largest_percentage = (largest_tumor / total_pixels) * 100
         
@@ -181,15 +185,24 @@ def upload_and_analyze():
         }), 400
     
     try:
-        # Save file
-        timestamp = int(time.time())
+        # Save file with UUID to prevent collisions
+        unique_id = uuid.uuid4().hex[:8]
         filename = secure_filename(file.filename)
-        safe_filename = f"{timestamp}_{filename}"
+        safe_filename = f"{unique_id}_{filename}"
         file_path = UPLOAD_DIR / safe_filename
         file.save(str(file_path))
         
-        # Load and analyze image
+        # Load image
         image = cv2.imread(str(file_path))
+        
+        # Limit resolution to prevent OOM errors (Max 1920x1080 bounding box)
+        max_dim = 1920
+        h, w = image.shape[:2]
+        if max(h, w) > max_dim:
+            scale = max_dim / max(h, w)
+            image = cv2.resize(image, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_AREA)
+            cv2.imwrite(str(file_path), image) # Resave downscaled version
+
         original_image = image.copy()
         
         # Run AI analysis
@@ -218,27 +231,26 @@ def upload_and_analyze():
             
             analysis_data['tumors_detected'] = len(masks)
             
-            # Create visualization
-            overlay = result_image.copy()
+            # Resize all masks to image dimensions using list comprehension
+            h, w = image.shape[:2]
+            tumor_masks = [cv2.resize(mask, (w, h), interpolation=cv2.INTER_NEAREST) for mask in masks]
             
-            for i, mask in enumerate(masks):
-                # Resize mask
-                mask_resized = cv2.resize(mask, (image.shape[1], image.shape[0]))
-                tumor_masks.append(mask_resized)
+            if tumor_masks:
+                # Combine all masks into a single boolean array for visualization
+                combined_mask = np.any(np.array(tumor_masks) > 0.5, axis=0)
                 
-                # Create colored overlay
+                # Create colored overlay in one shot
                 colored_mask = np.zeros_like(image)
-                colored_mask[mask_resized > 0.5] = [0, 255, 255]  # Cyan for tumors
+                colored_mask[combined_mask] = [0, 255, 255]  # Cyan for tumors
                 
-                # Blend with image
-                overlay = cv2.addWeighted(overlay, 0.7, colored_mask, 0.3, 0)
-                
-                # Add confidence scores
-                if i < len(boxes) and len(boxes[i]) > 4:
-                    confidence = float(boxes[i][4])
+                # Blend with image once
+                result_image = cv2.addWeighted(result_image, 0.7, colored_mask, 0.3, 0)
+
+            # Add confidence scores
+            for i, box in enumerate(boxes):
+                if len(box) > 4:
+                    confidence = float(box[4])
                     analysis_data['confidence_scores'].append(round(confidence, 3))
-            
-            result_image = overlay
             
             # Calculate medical metrics
             tumor_metrics = TumorAnalyzer.calculate_tumor_metrics(
