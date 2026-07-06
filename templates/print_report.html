@@ -4,111 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Analysis Report</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #333;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background: #fff;
-        }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #2563eb;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            color: #1e3a8a;
-            margin: 0;
-        }
-        .meta-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            font-size: 0.9em;
-            color: #666;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .section h2 {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-            color: #1e3a8a;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .data-box {
-            background: #f9fafb;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #e5e7eb;
-        }
-        .data-box strong {
-            display: block;
-            color: #4b5563;
-            font-size: 0.9em;
-        }
-        .data-box span {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #111827;
-        }
-        .images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .images img {
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .images-label {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .tumor-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        .tumor-table th, .tumor-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        .tumor-table th {
-            background: #f3f4f6;
-        }
-        ul.recommendations {
-            padding-left: 20px;
-        }
-        .disclaimer {
-            margin-top: 50px;
-            padding: 15px;
-            border: 1px solid #fca5a5;
-            background: #fef2f2;
-            color: #991b1b;
-            font-size: 0.85em;
-            border-radius: 5px;
-        }
-        @media print {
-            body { padding: 0; }
-            .no-print { display: none; }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}">
 </head>
 <body>
     <div class="no-print" style="text-align: right; margin-bottom: 20px;">
-        <button onclick="window.print()" style="padding: 10px 20px; background: #2563eb; color: #fff; border: none; cursor: pointer; border-radius: 5px;">Print Report</button>
+        <button onclick="window.print()" class="btn-print">Print Report</button>
     </div>
 
     <div class="header">
