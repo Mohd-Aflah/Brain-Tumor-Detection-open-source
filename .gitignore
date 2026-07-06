@@ -24,7 +24,10 @@ static/results/*
 backup/
 
 # Datasets / Large folders
-Training/BRAIN-TUMOR-1/
+# Training/BRAIN-TUMOR-1/
+
+# Caches
+*.cache
 
 # System
 .DS_Store
