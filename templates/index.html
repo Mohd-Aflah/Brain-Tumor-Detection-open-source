@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Analysis v1.0</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brain-icon">🧠</span>
+                <h1>Brain Tumor Analysis</h1>
+                <span class="version">v1.0</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/analyze" class="nav-link">Analyze Scan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="main-content">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>AI-Powered Brain Tumor Detection</h2>
+                <p>Upload MRI brain scans for instant AI analysis with detailed medical assessment</p>
+                
+                <!-- Features Grid -->
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔬</div>
+                        <h3>AI Detection</h3>
+                        <p>Advanced YOLO neural network for precise tumor identification</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Medical Analysis</h3>
+                        <p>Detailed metrics including size, location, and criticality assessment</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Fast Results</h3>
+                        <p>Get comprehensive analysis results in seconds</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>High Accuracy</h3>
+                        <p>Confidence scoring and medical-grade precision</p>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="hero-actions">
+                    <a href="/analyze" class="btn-primary">
+                        <span>Start Analysis</span>
+                        <span class="btn-icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Status -->
+        <section class="status-section">
+            <div class="status-container">
+                <h3>System Status</h3>
+                <div class="status-grid" id="statusGrid">
+                    <div class="status-item">
+                        <span class="status-label">System</span>
+                        <span class="status-value" id="systemStatus">
+                            <span class="status-loading">●</span> Checking...
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">AI Model</span>
+                        <span class="status-value" id="modelStatus">
+                            <span class="status-loading">●</span> Loading...
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Device</span>
+                        <span class="status-value" id="deviceStatus">
+                            <span class="status-loading">●</span> Detecting...
+                        </span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Version</span>
+                        <span class="status-value">v1.0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Brain Tumor Analysis System. Advanced Medical AI Technology.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

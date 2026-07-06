@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Scan Analysis - Brain Tumor Detection v1.0</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brain-icon">🧠</span>
+                <h1>Brain Tumor Analysis</h1>
+                <span class="version">v1.0</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/analyze" class="nav-link active">Analyze Scan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="analyze-container">
+            <h2>Upload Brain MRI Scan</h2>
+            <p>Upload a brain MRI scan for AI-powered tumor detection and medical analysis</p>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">
+                        <h3>Drag & Drop MRI Scan</h3>
+                        <p>or <span class="upload-link">click to browse</span></p>
+                        <small>Supported: JPG, PNG, TIFF (Max: 16MB)</small>
+                    </div>
+                    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.tiff" hidden>
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <div class="file-details">
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                    </div>
+                    <button class="btn-remove" id="removeFile">✕</button>
+                </div>
+
+                <button class="btn-analyze" id="analyzeBtn" disabled>
+                    <span id="analyzeText">Start Analysis</span>
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                </button>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section" id="progressSection">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Initializing analysis...</div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <h3>Analysis Results</h3>
+                
+                <!-- Medical Summary with Detailed Explanations -->
+                <div class="medical-summary" id="medicalSummary">
+                    <div class="summary-header">
+                        <h4>Medical Assessment</h4>
+                        <div class="criticality-badge" id="criticalityBadge"></div>
+                        
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-item" title="Number of tumor regions detected by AI">
+                            <span class="summary-label">Tumors Detected</span>
+                            <span class="summary-value" id="tumorsCount">-</span>
+                            <div class="explanation">Count of suspicious regions identified</div>
+                        </div>
+                        <div class="summary-item" title="Percentage of brain area affected by detected tumors">
+                            <span class="summary-label">Tumor Coverage</span>
+                            <span class="summary-value" id="tumorPercentage">-</span>
+                            <div class="explanation">Brain area affected by tumors</div>
+                        </div>
+                        <div class="summary-item" title="AI confidence in detection accuracy (0-100%)">
+                            <span class="summary-label">Confidence Level</span>
+                            <span class="summary-value" id="confidenceLevel">-</span>
+                            <div class="explanation">AI certainty in detection</div>
+                        </div>
+                        <div class="summary-item" title="Time taken to analyze the MRI scan">
+                            <span class="summary-label">Processing Time</span>
+                            <span class="summary-value" id="processingTime">-</span>
+                            <div class="explanation">Analysis duration</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Confidence Explanation -->
+                    <div class="confidence-guide">
+                        <h5>Understanding Confidence Levels:</h5>
+                        <div class="confidence-scale">
+                            <div class="confidence-item high">
+                                <span class="range">90-100%</span>
+                                <span class="meaning">Very High - Strong detection</span>
+                            </div>
+                            <div class="confidence-item good">
+                                <span class="range">75-89%</span>
+                                <span class="meaning">High - Reliable detection</span>
+                            </div>
+                            <div class="confidence-item moderate">
+                                <span class="range">60-74%</span>
+                                <span class="meaning">Moderate - Needs review</span>
+                            </div>
+                            <div class="confidence-item low">
+                                <span class="range">Below 60%</span>
+                                <span class="meaning">Low - Uncertain, expert review required</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="medical-recommendation" id="medicalRecommendation"></div>
+                </div>
+
+                <!-- Image Comparison -->
+                <div class="image-comparison">
+                    <div class="image-container">
+                        <h4>Original Scan</h4>
+                        <div class="image-wrapper">
+                            <img id="originalImage" src="" alt="Original MRI Scan" />
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <h4>Analysis Result</h4>
+                        <div class="image-wrapper">
+                            <img id="resultImage" src="" alt="Analyzed MRI Scan" />
+                            <div class="image-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color tumor"></span>
+                                    <span>Detected Tumors</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Metrics with Explanations -->
+                <div class="detailed-metrics" id="detailedMetrics">
+                    <h4>Detailed Analysis Breakdown</h4>
+                    <div class="metrics-explanation">
+                        <p><strong>What these measurements mean:</strong> Each metric provides specific information about the detected tumors and the analysis quality.</p>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-card" title="Size of the largest detected tumor region">
+                            <div class="metric-icon">📏</div>
+                            <div class="metric-info">
+                                <span class="metric-label">Largest Tumor</span>
+                                <span class="metric-value" id="largestTumor">-</span>
+                                <div class="metric-explanation">Size of biggest detected region</div>
+                            </div>
+                        </div>
+                        <div class="metric-card" title="Combined area of all detected tumor regions">
+                            <div class="metric-icon">📊</div>
+                            <div class="metric-info">
+                                <span class="metric-label">Total Volume</span>
+                                <span class="metric-value" id="totalVolume">-</span>
+                                <div class="metric-explanation">Combined size of all tumors</div>
+                            </div>
+                        </div>
+                        <div class="metric-card" title="Average confidence across all detections">
+                            <div class="metric-icon">🎯</div>
+                            <div class="metric-info">
+                                <span class="metric-label">Average Confidence</span>
+                                <span class="metric-value" id="avgConfidence">-</span>
+                                <div class="metric-explanation">Overall detection reliability</div>
+                            </div>
+                        </div>
+                        <div class="metric-card" title="Preliminary risk assessment based on findings">
+                            <div class="metric-icon">⚕️</div>
+                            <div class="metric-info">
+                                <span class="metric-label">Risk Assessment</span>
+                                <span class="metric-value" id="riskAssessment">-</span>
+                                <div class="metric-explanation">Initial risk evaluation</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Medical Disclaimer -->
+                    <div class="medical-disclaimer">
+                        <h5>⚠️ Important Medical Information:</h5>
+                        <ul>
+                            <li><strong>Research Tool Only:</strong> This AI system is designed for research and screening purposes only.</li>
+                            <li><strong>Not a Diagnosis:</strong> Results should not be used as the sole basis for medical diagnosis.</li>
+                            <li><strong>Professional Review Required:</strong> Always consult with qualified medical professionals.</li>
+                            <li><strong>Clinical Correlation:</strong> Consider symptoms, medical history, and additional tests.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tumor Details Table -->
+                <div class="tumor-details hidden" id="tumorDetails">
+                    <h4>Individual Tumor Analysis</h4>
+                    <div class="tumor-table-container">
+                        <table class="tumor-table" id="tumorTable">
+                            <thead>
+                                <tr>
+                                    <th>Tumor ID</th>
+                                    <th>Size (pixels)</th>
+                                    <th>Confidence</th>
+                                    <th>Location (X,Y)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tumorTableBody">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- New Analysis Button -->
+                <div class="action-buttons">
+                    <button class="btn-secondary" id="newAnalysisBtn">Analyze New Scan</button>
+                </div>
+            </div>
+
+            <!-- Error Section -->
+            <div class="error-section" id="errorSection">
+                <div class="error-content">
+                    <div class="error-icon">⚠️</div>
+                    <h3>Analysis Error</h3>
+                    <p id="errorMessage">An error occurred during analysis</p>
+                    <button class="btn-secondary" id="retryBtn">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/analyze.js') }}"></script>
+</body>
+</html>

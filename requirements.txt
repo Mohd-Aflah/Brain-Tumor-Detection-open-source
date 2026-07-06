@@ -1,0 +1,30 @@
+###############################################
+# Brain Tumor Detection — App Requirements    #
+# Python 3.10 Compatible Versions             #
+###############################################
+
+# Web framework
+Flask==3.0.3
+
+# Image processing and numerics (install first)
+numpy==1.26.4
+opencv-python==4.10.0.84
+Pillow==10.4.0
+
+# AI model and dependencies
+torch==2.5.1
+torchvision==0.20.1
+ultralytics==8.3.50
+
+# PPT generation
+python-pptx==1.0.2
+
+# Additional dependencies
+PyYAML==6.0.2
+scipy==1.14.1
+matplotlib==3.9.2
+requests==2.32.3
+psutil==6.1.0
+
+# Optional: production server (Linux/macOS typically)
+# gunicorn>=21.2.0

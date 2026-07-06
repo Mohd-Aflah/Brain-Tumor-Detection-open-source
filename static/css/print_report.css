@@ -1,0 +1,294 @@
+/**
+ * Brain Tumor Analysis Report - Print Styles
+ * ==========================================
+ * 
+ * Professional medical report styling for printable documents
+ * Optimized for both screen display and print output
+ */
+
+/* Print-specific styles */
+@media print {
+    body { 
+        margin: 0; 
+    }
+    .no-print { 
+        display: none !important; 
+    }
+    .page-break { 
+        page-break-before: always; 
+    }
+}
+
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    color: #333;
+}
+
+/* Report header */
+.report-header {
+    text-align: center;
+    border-bottom: 3px solid #2c3e50;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.report-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.report-subtitle {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.report-date {
+    font-size: 14px;
+    color: #95a5a6;
+}
+
+/* Section styles */
+.section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ecf0f1;
+    border-radius: 5px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+/* Grid layouts */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid #3498db;
+}
+
+.summary-label {
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.summary-value {
+    font-size: 18px;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Image styles */
+.image-section {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.image-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.image-container {
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+/* Confidence scale */
+.confidence-scale {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.confidence-item {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.confidence-item.high { 
+    background: #d5f4e6; 
+    color: #27ae60; 
+}
+
+.confidence-item.good { 
+    background: #fef9e7; 
+    color: #f39c12; 
+}
+
+.confidence-item.moderate { 
+    background: #fdf2e9; 
+    color: #e67e22; 
+}
+
+.confidence-item.low { 
+    background: #fadbd8; 
+    color: #e74c3c; 
+}
+
+/* Table styles */
+.tumor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.tumor-table th,
+.tumor-table td {
+    border: 1px solid #bdc3c7;
+    padding: 12px;
+    text-align: left;
+}
+
+.tumor-table th {
+    background: #34495e;
+    color: white;
+    font-weight: bold;
+}
+
+.tumor-table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+/* Disclaimer styles */
+.disclaimer {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.disclaimer h4 {
+    color: #856404;
+    margin-top: 0;
+}
+
+.disclaimer ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.disclaimer li {
+    margin: 5px 0;
+    color: #856404;
+}
+
+/* Footer styles */
+.footer {
+    border-top: 2px solid #2c3e50;
+    padding-top: 20px;
+    margin-top: 40px;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 12px;
+}
+
+/* Button styles */
+.button-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.print-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.print-button:hover {
+    background: #2980b9;
+}
+
+.close-button {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background: #7f8c8d;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-comparison {
+        grid-template-columns: 1fr;
+    }
+    
+    .confidence-scale {
+        grid-template-columns: 1fr;
+    }
+    
+    body {
+        margin: 10px;
+    }
+    
+    .section {
+        padding: 10px;
+    }
+}
+
+/* Additional print optimizations */
+@media print {
+    .section {
+        break-inside: avoid;
+        margin-bottom: 20px;
+    }
+    
+    .image-comparison {
+        break-inside: avoid;
+    }
+    
+    .tumor-table {
+        break-inside: avoid;
+    }
+    
+    .disclaimer {
+        break-inside: avoid;
+    }
+}
